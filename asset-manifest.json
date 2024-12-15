@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/TestApp/static/css/main.c4334cc7.css",
+    "main.js": "/TestApp/static/js/main.f07f341e.js",
+    "static/media/Oswald-VariableFont_wght.ttf": "/TestApp/static/media/Oswald-VariableFont_wght.7cecd0da606d25b0905d.ttf",
+    "index.html": "/TestApp/index.html",
+    "main.c4334cc7.css.map": "/TestApp/static/css/main.c4334cc7.css.map",
+    "main.f07f341e.js.map": "/TestApp/static/js/main.f07f341e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c4334cc7.css",
+    "static/js/main.f07f341e.js"
+  ]
+}
