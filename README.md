@@ -36,12 +36,6 @@ If you'd like to run TestApp locally:
    npm start
    ```
 
-## Contributing
-Contributions are welcome! If you have ideas for new features or improvements, feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/Denys209818/TestApp).
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/Denys209818/TestApp/blob/main/LICENSE) file for more details.
-
 ## Acknowledgments
 Inspired by tools like Postman and designed to simplify HTTP request testing for developers.
 
