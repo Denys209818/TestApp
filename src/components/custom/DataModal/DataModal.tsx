@@ -2,7 +2,7 @@ import { responseActions } from "../../../redux/reducers/responseReducer";
 import { useAppDispatch, useAppSelector } from "../../../services/customHooks";
 
 export const DataModal = () => {
-    const { status, json } = useAppSelector(state => state.response);
+    const { status, json, jsonError, statusError } = useAppSelector(state => state.response);
     const dispatch = useAppDispatch();
 
     return (
@@ -21,6 +21,7 @@ export const DataModal = () => {
             top-[50%]
             translate-x-middle
             translate-y-middle
+            max-h-[600px] overflow-y-auto
             bg-white
         `}>
             <div className="block border-b-2 border-black px-2 py-1 bg-[#A0D683]">
@@ -47,6 +48,36 @@ export const DataModal = () => {
                     Закрити вікно
                 </button>
             </div>
+
+            {statusError && (
+                <div className="p-4">
+                    <p>Статуc не пройшов перевірку</p>
+                    <textarea
+                        readOnly
+                        style={{ resize: 'none' }}
+                        value={statusError}
+                        className="block mt-4 p-4 border border-black w-full max-h-[400px]"
+                        placeholder="Помилка"
+                    >
+                
+                    </textarea>
+                </div>
+            )}
+
+            {jsonError && (
+                <div className="p-4">
+                    <p>Відповідь не співпадає</p>
+                    <textarea
+                        readOnly
+                        style={{ resize: 'none' }}
+                        value={jsonError}
+                        className="block mt-4 p-4 border border-black w-full h-[200px]"
+                        placeholder="Помилка"
+                    >
+                
+                    </textarea>
+                </div>
+            )}
         </div>
     </dialog>
     );

@@ -1,4 +1,5 @@
 import { ParamsType } from "../components/RequestDialog/types/types";
+import { TestType } from "../redux/reducers/testReducer";
 
 export type SendingRequestType = {
     url: string;
@@ -7,7 +8,8 @@ export type SendingRequestType = {
     token?: string;
     prefix?: string;
     dataType?: string;
-    data?: any; 
+    data?: any;
+    testData?: TestType; 
 };
 
 export const sendRequest = async (
@@ -18,7 +20,8 @@ export const sendRequest = async (
         token,
         prefix,
         dataType,
-        data
+        data,
+        testData,
     }: SendingRequestType
 ) => {
     const requestInit: RequestInit = {
@@ -44,6 +47,11 @@ export const sendRequest = async (
                     form.append(item.key, item.value);
                 }
 
+                requestInit.headers = {
+                    ...requestInit.headers,
+                    'Content-Type':'multipart/form-data'
+                };
+
                 requestInit.body = form;
 
                 break;
@@ -51,6 +59,10 @@ export const sendRequest = async (
 
             case 'json': {
                 const jsonData = data as string;
+                requestInit.headers = {
+                    ...requestInit.headers,
+                    'Content-Type':'application/json'
+                };
                 requestInit.body = jsonData;
 
                 break;
@@ -62,11 +74,11 @@ export const sendRequest = async (
         const result = await fetch(url, requestInit);
 
         if (result.ok) {
-            return  { data: await result.json(), status: result.status };
+            return  { data: await result.json(), status: result.status, testData };
         }
         
-        return { data: await result.json(), status: result.status};
+        return { data: await result.json(), status: result.status, testData };
     } catch {
-        return { data: 'application come across error!', status: 500};
+        return { data: 'application come across error!', status: 500, testData };
     }
 }

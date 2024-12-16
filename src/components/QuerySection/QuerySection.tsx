@@ -17,6 +17,10 @@ export const QuerySection: React.FC = () => {
     }
 
     useEffect(() => {
+        changeParamsList();
+    }, []);
+
+    useEffect(() => {
         if (isChange) {
             const questInd = query.indexOf('?') || 0;
             let searchParams = query.slice(0, questInd) + '?';
@@ -45,7 +49,6 @@ export const QuerySection: React.FC = () => {
     const changeParamsList = () => {
         const search = params;
         const ind = query.indexOf('?');
-
 
         if (ind < 0) {
             dispatch(queryActions.setParams([]));

@@ -6,6 +6,7 @@ export type QueryType = {
     method: string;
     error: string;
     params: ParamsType[];
+    isChange: boolean;
 };
 
 const querySlice = createSlice({
@@ -14,6 +15,7 @@ const querySlice = createSlice({
         method: 'GET',
         error: '',
         params: [] as ParamsType[],
+        isChange: false,
     },
     reducers: {
         changeMethod(state: QueryType, action: PayloadAction<string>) {
@@ -42,15 +44,16 @@ const querySlice = createSlice({
             return {
                 ...state,
                 params: [...state.params.map(param => {
-                if (param.id === id) {
-                    return {
-                        ...param,
-                        checked: checked
-                    };
-                }
-    
-                return param;
-            })]};
+                    if (param.id === id) {
+                        return {
+                            ...param,
+                            checked: checked
+                        };
+                    }
+
+                    return param;
+                })]
+            };
         },
         changeValue(state: QueryType, action: PayloadAction<{ id: string, value: string }>) {
             const { id, value } = action.payload;
@@ -58,15 +61,16 @@ const querySlice = createSlice({
             return {
                 ...state,
                 params: [...state.params.map(param => {
-                if (param.id === id) {
-                    return {
-                        ...param,
-                        value: value
-                    };
-                }
-    
-                return param;
-            })]};
+                    if (param.id === id) {
+                        return {
+                            ...param,
+                            value: value
+                        };
+                    }
+
+                    return param;
+                })]
+            };
         },
         changeKey(state: QueryType, action: PayloadAction<{ id: string, value: string }>) {
             const { id, value } = action.payload;
@@ -74,25 +78,27 @@ const querySlice = createSlice({
             return {
                 ...state,
                 params: [...state.params.map(param => {
-                if (param.id === id) {
-                    return {
-                        ...param,
-                        key: value
-                    };
-                }
-    
-                return param;
-            })]};
+                    if (param.id === id) {
+                        return {
+                            ...param,
+                            key: value
+                        };
+                    }
+
+                    return param;
+                })]
+            };
         },
         removeItem(state: QueryType, action: PayloadAction<{ id: string }>) {
             const { id } = action.payload;
 
             return {
                 ...state,
-                params: [...state.params.filter(param => param.id !== id)]};
+                params: [...state.params.filter(param => param.id !== id)]
+            };
         },
     },
-    name: 'query'
+    name: 'query',
 });
 
 export const queryActions = querySlice.actions;

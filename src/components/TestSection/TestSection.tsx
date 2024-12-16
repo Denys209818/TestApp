@@ -18,7 +18,7 @@ export const TestSection: React.FC = () => {
 
         <textarea
             placeholder="Expected json data"
-            className="block p-4 mt-3 border border-black w-full"
+            className="block p-4 mt-3 border border-black w-full h-[200px]"
             value={expectedJson}
             onChange={(e) => dispatch(testActions.setExpectedJson(e.target.value))}
         >

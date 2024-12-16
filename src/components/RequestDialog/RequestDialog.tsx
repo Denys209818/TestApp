@@ -55,7 +55,6 @@ export const RequestDialog: React.FC = () => {
                 }
             }
 
-
             dispatch(OpenResultModal({
                 url: query,
                 method: method,
@@ -63,7 +62,7 @@ export const RequestDialog: React.FC = () => {
                 token: token,
                 prefix: prefix,
                 dataType: bodyType,
-                data: data
+                data: data,
             }));
         }
 
