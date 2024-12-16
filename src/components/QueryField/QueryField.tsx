@@ -1,3 +1,5 @@
+import { queryActions } from "../../redux/reducers/queryReducer";
+import { useAppDispatch, useAppSelector } from "../../services/customHooks";
 
 export type QueryFieldType = {
     query: string;
@@ -6,7 +8,26 @@ export type QueryFieldType = {
 }
 
 export const QueryField: React.FC<QueryFieldType> = ({ query, setQuery, onSubmitHandler }) => {
+    const dispatch = useAppDispatch();
+    const { method } = useAppSelector(state => state.query);
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+
+        dispatch(queryActions.changeMethod(value));
+    }
+
     return (<form className="flex" onSubmit={onSubmitHandler}>
+        <select 
+            className="border border-black"
+            onChange={handleChange}
+            value={method}
+        >
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PATCH">PATCH</option>
+            <option value="DELETE">DELETE</option>
+        </select>
         <input
             type="text"
             value={query}

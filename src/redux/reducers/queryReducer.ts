@@ -3,15 +3,20 @@ import { ParamsType } from "../../components/RequestDialog/types/types";
 
 export type QueryType = {
     query: string;
+    method: string;
     params: ParamsType[];
 };
 
 const querySlice = createSlice({
     initialState: {
         query: '',
+        method: 'GET',
         params: [] as ParamsType[],
     },
     reducers: {
+        changeMethod(state: QueryType, action: PayloadAction<string>) {
+            state.method = action.payload;
+        },
         changeQuery(state: QueryType, action: PayloadAction<string>) {
             state.query = action.payload.trim();
         },
