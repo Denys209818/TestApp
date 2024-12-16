@@ -9,12 +9,17 @@ import BodySection from "../BodySection";
 import { useAppDispatch, useAppSelector } from "../../services/customHooks";
 import { queryActions } from "../../redux/reducers/queryReducer";
 import TestSection from "../TestSection";
+import DataModal from "../custom/DataModal";
+import { OpenResultModal } from "../../actions/responseAction";
 
 export const RequestDialog: React.FC = () => {
     const [activeTab, setActiveTab] = useState('params');
     const dispatch = useAppDispatch();
 
-    const { query } = useAppSelector(state => state.query);
+    const { query, method } = useAppSelector(state => state.query);
+    const { params: headers } = useAppSelector(state => state.header);
+    const { token, prefix } = useAppSelector(state => state.auth);
+    const { type: bodyType, jsonText, params: bodyParams } = useAppSelector(state => state.body);
 
     const setQuery = (arg: string) => {
         dispatch(queryActions.changeQuery(arg));
@@ -22,6 +27,51 @@ export const RequestDialog: React.FC = () => {
 
     const onSendRequest = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        dispatch(queryActions.setError(''));
+
+        async function send() {
+            const resultObj = {} as { [key: string]: string };
+
+            for (const header of headers) {
+                resultObj[header.key] = header.value;
+            }
+
+            let data: any;
+
+            if (bodyType) {
+                switch (bodyType) {
+                    case 'json': {
+                        data = jsonText;
+
+                        break;
+                    }
+
+                    case 'form-data': {
+                        data = bodyParams;
+
+                        break;
+                    }
+                }
+            }
+
+
+            dispatch(OpenResultModal({
+                url: query,
+                method: method,
+                headers: resultObj,
+                token: token,
+                prefix: prefix,
+                dataType: bodyType,
+                data: data
+            }));
+        }
+
+        if (query && query.startsWith('http')) {
+            send();
+        } else {
+            dispatch(queryActions.setError('Enter a valid email'));
+        }
     }
 
     const tabs = useMemo(() => {
@@ -79,6 +129,8 @@ export const RequestDialog: React.FC = () => {
 
                 {activeTab === 'tests' && <TestSection />}
             </div>
+
         </div>
+        <DataModal />
     </div>);
 }

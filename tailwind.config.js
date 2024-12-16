@@ -15,6 +15,7 @@ module.exports = {
       },
       spacing: {
         'del-space': 'calc(-100% - 8px)',
+        'middle': '-50%'
       }
     },
   },

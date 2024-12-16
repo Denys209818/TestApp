@@ -75,13 +75,13 @@ export const BodySection = () => {
 
             <label className="flex gap-1 items-center" htmlFor="json">
                 <p>JSON</p>
-                <input type="radio" id="json" name="option" onChange={() => setType('json')} />
+                <input type="radio" checked={type === 'json'} id="json" name="option" onChange={() => setType('json')} />
             </label>
 
 
             <label className="flex gap-1 items-center" htmlFor="form-data">
                 <p>Form Data</p>
-                <input type="radio" id="form-data" name="option" onChange={() => setType('form-data')} />
+                <input type="radio" checked={type === 'form-data'} id="form-data" name="option" onChange={() => setType('form-data')} />
             </label>
         </div>
 

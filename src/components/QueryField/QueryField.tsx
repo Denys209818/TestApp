@@ -9,7 +9,7 @@ export type QueryFieldType = {
 
 export const QueryField: React.FC<QueryFieldType> = ({ query, setQuery, onSubmitHandler }) => {
     const dispatch = useAppDispatch();
-    const { method } = useAppSelector(state => state.query);
+    const { method, error } = useAppSelector(state => state.query);
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
@@ -17,26 +17,27 @@ export const QueryField: React.FC<QueryFieldType> = ({ query, setQuery, onSubmit
         dispatch(queryActions.changeMethod(value));
     }
 
-    return (<form className="flex" onSubmit={onSubmitHandler}>
-        <select 
-            className="border border-black"
-            onChange={handleChange}
-            value={method}
-        >
-            <option value="GET">GET</option>
-            <option value="POST">POST</option>
-            <option value="PATCH">PATCH</option>
-            <option value="DELETE">DELETE</option>
-        </select>
-        <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="block p-2 w-full border outline-none"
-            placeholder="Type url for request..."
-        />
+    return (<form onSubmit={onSubmitHandler}>
+        <div className="flex">
+            <select
+                className="border border-black"
+                onChange={handleChange}
+                value={method}
+            >
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PATCH">PATCH</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+            <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="block p-2 w-full border outline-none"
+                placeholder="Type url for request..."
+            />
 
-        <button className={`
+            <button className={`
             black
             py-2
             px-4
@@ -48,7 +49,12 @@ export const QueryField: React.FC<QueryFieldType> = ({ query, setQuery, onSubmit
             font-medium
             uppercase
         `}>
-            Send
-        </button>
+                Send
+            </button>
+        </div>
+
+        {error && <p className="text-[#D91656]">
+            {error}
+        </p>}
     </form>);
 }
