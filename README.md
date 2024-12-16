@@ -31,7 +31,10 @@ If you'd like to run TestApp locally:
    ```bash
    cd TestApp
    ```
-3. Open the `index.html` file in your preferred web browser.
+3. Start the project.
+   ```bash
+   npm start
+   ```
 
 ## Contributing
 Contributions are welcome! If you have ideas for new features or improvements, feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/Denys209818/TestApp).
