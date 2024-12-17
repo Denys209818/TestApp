@@ -22,7 +22,7 @@ export const QuerySection: React.FC = () => {
 
     useEffect(() => {
         if (isChange) {
-            const questInd = query.indexOf('?') || 0;
+            const questInd = query.indexOf('?') < 0 ? query.length : query.indexOf('?');
             let searchParams = query.slice(0, questInd) + '?';
 
             for (let i = 0; i < params.length; i++) {
@@ -30,7 +30,7 @@ export const QuerySection: React.FC = () => {
                     searchParams += `${params[i].key}=${params[i].value}&`;
                 }
             }
-
+            
             setQuery(searchParams.slice(0, -1));
             setIsChange(false);
         } else {

@@ -36,7 +36,7 @@ export const sendRequest = async (
         };
     }
 
-    if (dataType) {
+    if (dataType && method !== 'GET') {
         switch (dataType) {
             case 'form-data': {
                 const formData = data as ParamsType[];
@@ -70,15 +70,15 @@ export const sendRequest = async (
         }
     }
 
-    try {
-        const result = await fetch(url, requestInit);
+    const result = await fetch(url, requestInit);
 
+    try {
         if (result.ok) {
             return  { data: await result.json(), status: result.status, testData };
         }
         
         return { data: await result.json(), status: result.status, testData };
-    } catch {
-        return { data: 'application come across error!', status: 500, testData };
+    } catch(err: any) {
+        return { data: err.message || 'application come across error!', status: result.status, testData };
     }
 }

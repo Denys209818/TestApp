@@ -2,7 +2,6 @@
   "name": "testingsoftware",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://denys209818.github.io/TestApp",
   "dependencies": {
     "@faker-js/faker": "^9.3.0",
     "@fortawesome/fontawesome-free": "^6.7.1",

@@ -28,27 +28,6 @@ export const DataModal = () => {
                 <h1 className="font-display text-title">Результат</h1>
             </div>
 
-            <div className="block p-4">
-                <h4>Статус код: {status}</h4>
-
-                <textarea
-                    readOnly
-                    style={{ resize: 'none' }}
-                    value={json}
-                    className="block mt-4 p-4 border border-black w-full h-[400px]"
-                    placeholder="Відповідь із сервера (JSON)"
-                >
-                    
-                </textarea>
-
-                <button
-                    className="block mt-3 p-2 bg-[#001A6E] text-white"
-                    onClick={() => dispatch(responseActions.clearData())}
-                >
-                    Закрити вікно
-                </button>
-            </div>
-
             {statusError && (
                 <div className="p-4">
                     <p>Статуc не пройшов перевірку</p>
@@ -78,6 +57,27 @@ export const DataModal = () => {
                     </textarea>
                 </div>
             )}
+
+            <div className="block p-4">
+                <h4>Статус код: {status}</h4>
+
+                <textarea
+                    readOnly
+                    style={{ resize: 'none' }}
+                    value={json}
+                    className="block mt-4 p-4 border border-black w-full h-[400px]"
+                    placeholder="Відповідь із сервера (JSON)"
+                >
+                    
+                </textarea>
+
+                <button
+                    className="block mt-3 p-2 bg-[#001A6E] text-white"
+                    onClick={() => dispatch(responseActions.clearData())}
+                >
+                    Закрити вікно
+                </button>
+            </div>
         </div>
     </dialog>
     );
